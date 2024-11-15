@@ -12,6 +12,8 @@ import (
 	"github.com/go-contrib/uuid"
 	"golang.org/x/sync/errgroup"
 
+	apikeyauth "github.com/anshulgoel27/krakend-apikey-auth"
+	apikeyauthgin "github.com/anshulgoel27/krakend-apikey-auth/gin"
 	kotel "github.com/krakend/krakend-otel"
 	otellura "github.com/krakend/krakend-otel/lura"
 	otelgin "github.com/krakend/krakend-otel/router/gin"
@@ -104,7 +106,7 @@ type BackendFactory interface {
 
 // HandlerFactory returns a KrakenD router handler factory, ready to be passed to the KrakenD RouterFactory
 type HandlerFactory interface {
-	NewHandlerFactory(logging.Logger, *metrics.Metrics, jose.RejecterFactory) router.HandlerFactory
+	NewHandlerFactory(logging.Logger, *metrics.Metrics, jose.RejecterFactory, *apikeyauth.AuthKeyLookupManager) router.HandlerFactory
 }
 
 // LoggerFactory returns a KrakenD Logger factory, ready to be passed to the KrakenD RouterFactory
@@ -207,7 +209,13 @@ func (e *ExecutorBuilder) NewCmdExecutor(ctx context.Context) cmd.Executor {
 
 		agentPing := make(chan string, len(cfg.AsyncAgents))
 
-		handlerF := e.HandlerFactory.NewHandlerFactory(logger, metricCollector, tokenRejecterFactory)
+		apiKeyAuthManager, err := apikeyauthgin.NewApiKeyAuthenticator(cfg, logger)
+
+		if err != nil {
+			logger.Warning("[SERVICE: apikey-auth]", err.Error())
+		}
+
+		handlerF := e.HandlerFactory.NewHandlerFactory(logger, metricCollector, tokenRejecterFactory, apiKeyAuthManager)
 		handlerF = otelgin.New(handlerF)
 
 		runServerChain := serverhttp.RunServerWithLoggerFactory(logger)

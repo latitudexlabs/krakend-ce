@@ -3,6 +3,9 @@ package krakend
 import (
 	"fmt"
 
+	apikeyauth "github.com/anshulgoel27/krakend-apikey-auth"
+	apikeyauthgin "github.com/anshulgoel27/krakend-apikey-auth/gin"
+	basicauth "github.com/anshulgoel27/krakend-basic-auth/gin"
 	botdetector "github.com/krakendio/krakend-botdetector/v2/gin"
 	jose "github.com/krakendio/krakend-jose/v2"
 	ginjose "github.com/krakendio/krakend-jose/v2/gin"
@@ -20,8 +23,12 @@ import (
 )
 
 // NewHandlerFactory returns a HandlerFactory with a rate-limit and a metrics collector middleware injected
-func NewHandlerFactory(logger logging.Logger, metricCollector *metrics.Metrics, rejecter jose.RejecterFactory) router.HandlerFactory {
+func NewHandlerFactory(logger logging.Logger, metricCollector *metrics.Metrics, rejecter jose.RejecterFactory, apiKeyAuthManager *apikeyauth.AuthKeyLookupManager) router.HandlerFactory {
 	handlerFactory := router.CustomErrorEndpointHandler(logger, server.DefaultToHTTPError)
+	handlerFactory = basicauth.New(handlerFactory, logger)
+	if apiKeyAuthManager != nil {
+		handlerFactory = apikeyauthgin.NewHandlerFactory(apiKeyAuthManager, handlerFactory, logger)
+	}
 	handlerFactory = ratelimit.NewRateLimiterMw(logger, handlerFactory)
 	handlerFactory = lua.HandlerFactory(logger, handlerFactory)
 	handlerFactory = ginjose.HandlerFactory(handlerFactory, logger, rejecter)
@@ -37,6 +44,6 @@ func NewHandlerFactory(logger logging.Logger, metricCollector *metrics.Metrics, 
 
 type handlerFactory struct{}
 
-func (handlerFactory) NewHandlerFactory(l logging.Logger, m *metrics.Metrics, r jose.RejecterFactory) router.HandlerFactory {
-	return NewHandlerFactory(l, m, r)
+func (handlerFactory) NewHandlerFactory(l logging.Logger, m *metrics.Metrics, r jose.RejecterFactory, apiKeyAuthManager *apikeyauth.AuthKeyLookupManager) router.HandlerFactory {
+	return NewHandlerFactory(l, m, r, apiKeyAuthManager)
 }

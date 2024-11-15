@@ -3,6 +3,8 @@ module github.com/krakendio/krakend-ce/v2
 go 1.22
 
 require (
+	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241115164116-d5f4b24a20db
+	github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-contrib/uuid v1.2.0
 	github.com/krakend/krakend-otel v0.6.2
@@ -35,7 +37,7 @@ require (
 	github.com/krakendio/krakend-usage/v2 v2.0.0
 	github.com/krakendio/krakend-viper/v2 v2.0.1
 	github.com/krakendio/krakend-xml/v2 v2.1.0
-	github.com/luraproject/lura/v2 v2.7.0
+	github.com/luraproject/lura/v2 v2.7.1
 	github.com/spf13/cobra v1.8.0
 	github.com/xeipuuv/gojsonschema v1.2.1-0.20200424115421-065759f9c3d7
 	golang.org/x/sync v0.8.0
