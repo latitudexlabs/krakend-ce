@@ -16,7 +16,7 @@ import (
 	oauth2client "github.com/krakendio/krakend-oauth2-clientcredentials/v2"
 	opencensus "github.com/krakendio/krakend-opencensus/v2"
 	pubsub "github.com/krakendio/krakend-pubsub/v2"
-	ratelimit "github.com/krakendio/krakend-ratelimit/v3/proxy"
+	ratelimit "github.com/anshulgoel27/krakend-ratelimit/v3/proxy"
 	"github.com/luraproject/lura/v2/config"
 	"github.com/luraproject/lura/v2/logging"
 	"github.com/luraproject/lura/v2/proxy"

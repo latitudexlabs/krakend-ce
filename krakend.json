@@ -203,16 +203,20 @@
         },
         {
             "endpoint": "/private/{user}",
+            "method": "POST",
             "backend": [
                 {
-                    "host": [
-                        "http://api.github.com"
-                    ],
+                    "host": ["nats://"],
+                    "disable_host_sanitize": true,
+                    "encoding": "json",
+
+                    "extra_config": {
+                        "github.com/devopsfaith/krakend-pubsub/publisher": {
+                            "topic_url": "key-created"
+                        }
+                    },
                     "url_pattern": "/",
-                    "allow": [
-                        "authorizations_url",
-                        "code_search_url"
-                    ]
+                    "input_headers": [""]
                 }
             ],
             "extra_config": {
@@ -299,6 +303,21 @@
                 "github_com/anshulgoel27/krakend-apikey-auth": {
                     "roles": [
                         "admin"
+                    ]
+                },
+                "github_com/anshulgoel27/krakend-ratelimit/tiered": {
+                    "tier_key": "X-API-Role",
+                    "tiers": [
+                        {
+                            "tier_value": "admin",
+                            "ratelimit": {
+                                "client_max_rate": 100,
+                                "client_capacity": 100,
+                                "every": "1m",
+                                "max_rate": 10000,
+                                "strategy": "ip"
+                            }
+                        }
                     ]
                 }
             }
