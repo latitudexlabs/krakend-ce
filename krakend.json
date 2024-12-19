@@ -6,6 +6,10 @@
     "cache_ttl": "3600s",
     "timeout": "3s",
     "extra_config": {
+        "auth/validator": {
+            "@comment": "Enable a JWK shared cache amongst all endpoints of 15 minutes",
+            "shared_cache_duration": 900
+        },
         "telemetry/logging": {
             "level": "DEBUG",
             "prefix": "[KRAKEND]",
@@ -211,8 +215,33 @@
                     "encoding": "json",
 
                     "extra_config": {
-                        "github.com/devopsfaith/krakend-pubsub/publisher": {
+                        "backend/pubsub/publisher": {
                             "topic_url": "key-created"
+                        }
+                    },
+                    "url_pattern": "/",
+                    "input_headers": [""]
+                }
+            ],
+            "extra_config": {
+                "github_com/anshulgoel27/krakend-basic-auth": {
+                    "pass": "fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9",
+                    "user": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
+                }
+            }
+        },
+        {
+            "endpoint": "/private1/{user}",
+            "method": "GET",
+            "timeout": "50ms",
+            "backend": [
+                {
+                    "host": ["nats://"],
+                    "disable_host_sanitize": true,
+                    "encoding": "json",
+                    "extra_config": {
+                        "backend/pubsub/subscriber": {
+                            "subscription_url": "key-created"
                         }
                     },
                     "url_pattern": "/",
@@ -343,6 +372,34 @@
                         "admin",
                         "user"
                     ]
+                }
+            }
+        },
+        {
+            "endpoint": "/both1/{user}",
+            "method": "GET",
+            "backend": [
+                {
+                    "host": [
+                        "https://api.github.com"
+                    ],
+                    "url_pattern": "/",
+                    "allow": [
+                        "authorizations_url",
+                        "code_search_url"
+                    ]
+                }
+            ],
+            "extra_config": {
+                "auth/validator": {
+                    "alg": "RS256",
+                    "audience": ["account"],
+                    "jwk_url": "http://localhost:8082/realms/master/protocol/openid-connect/certs",
+                    "cache": true,
+                    "roles_key": "resource_access.portal-web.roles",
+                    "roles": ["create-key"],
+                    "roles_key_is_nested": true,
+                    "disable_jwk_security": true
                 }
             }
         }
