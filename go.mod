@@ -2,14 +2,8 @@ module github.com/krakendio/krakend-ce/v2
 
 go 1.22.0
 
-toolchain go1.22.7
-
 require (
-	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241217060413-f10421b740c1
-	github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b
-	github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241220161853-67f784206c3b
-	github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20241217053714-5ebd55290bfe
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.9.1
 	github.com/go-contrib/uuid v1.2.0
 	github.com/krakend/krakend-otel v0.6.2
 	github.com/krakendio/bloomfilter/v2 v2.0.4
@@ -36,6 +30,7 @@ require (
 	github.com/krakendio/krakend-oauth2-clientcredentials/v2 v2.0.1
 	github.com/krakendio/krakend-opencensus/v2 v2.1.0
 	github.com/krakendio/krakend-pubsub/v2 v2.0.1
+	github.com/krakendio/krakend-ratelimit/v3 v3.2.1
 	github.com/krakendio/krakend-rss/v2 v2.0.1
 	github.com/krakendio/krakend-usage/v2 v2.0.0
 	github.com/krakendio/krakend-viper/v2 v2.0.1
@@ -101,8 +96,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.30.3 // indirect
 	github.com/aws/smithy-go v1.20.3 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/bytedance/sonic v1.12.6 // indirect
-	github.com/bytedance/sonic/loader v0.2.1 // indirect
+	github.com/bytedance/sonic v1.12.5 // indirect
+	github.com/bytedance/sonic/loader v0.2.0 // indirect
 	github.com/catalinc/hashcash v0.0.0-20161205220751-e6bc29ff4de9 // indirect
 	github.com/cenkalti/backoff/v3 v3.2.2 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -173,7 +168,6 @@ require (
 	github.com/krakendio/binder v0.0.0-20241115150014-29ceb1a9414b // indirect
 	github.com/krakendio/flatmap v1.1.1 // indirect
 	github.com/krakendio/httpcache v0.0.0-20221129153752-65a87a5c2bc5 // indirect
-	github.com/krakendio/krakend-ratelimit/v3 v3.1.0 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
@@ -236,7 +230,6 @@ require (
 	github.com/valyala/fastrand v1.1.0 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
-	github.com/yl2chen/cidranger v1.0.2 // indirect
 	github.com/yuin/gopher-lua v1.1.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.53.0 // indirect
@@ -262,7 +255,7 @@ require (
 	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8 // indirect
 	golang.org/x/mod v0.19.0 // indirect
-	golang.org/x/net v0.33.0 // indirect
+	golang.org/x/net v0.32.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
@@ -274,7 +267,7 @@ require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20240812133136-8ffd90a71988 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240812133136-8ffd90a71988 // indirect
 	google.golang.org/grpc v1.65.0 // indirect
-	google.golang.org/protobuf v1.36.0 // indirect
+	google.golang.org/protobuf v1.35.2 // indirect
 	gopkg.in/DataDog/dd-trace-go.v1 v1.62.0 // indirect
 	gopkg.in/Graylog2/go-gelf.v2 v2.0.0-20191017102106-1550ee647df0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
