@@ -2,7 +2,7 @@
     "$schema": "https://www.krakend.io/schema/v2.5/krakend.json",
     "version": 3,
     "name": "My lovely gateway",
-    "port": 8080,
+    "port": 8082,
     "cache_ttl": "3600s",
     "timeout": "3s",
     "extra_config": {
@@ -216,7 +216,7 @@
 
                     "extra_config": {
                         "backend/pubsub/publisher": {
-                            "topic_url": "key-created"
+                            "topic_url": "event.key.created"
                         }
                     },
                     "url_pattern": "/",
@@ -224,9 +224,10 @@
                 }
             ],
             "extra_config": {
-                "github_com/anshulgoel27/krakend-basic-auth": {
-                    "pass": "fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9",
-                    "user": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
+                "github_com/anshulgoel27/krakend-apikey-auth": {
+                    "roles": [
+                        "admin"
+                    ]
                 }
             }
         },
@@ -394,7 +395,7 @@
                 "auth/validator": {
                     "alg": "RS256",
                     "audience": ["account"],
-                    "jwk_url": "http://localhost:8082/realms/master/protocol/openid-connect/certs",
+                    "jwk_url": "http://localhost:8080/realms/master/protocol/openid-connect/certs",
                     "cache": true,
                     "roles_key": "resource_access.portal-web.roles",
                     "roles": ["create-key"],

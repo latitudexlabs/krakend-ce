@@ -15,7 +15,10 @@
                 "-c",
                 "./krakend.json",
                 "-d"
-            ]
+            ],
+            "env": {
+                "NATS_SERVER_URL": "localhost:4222"
+            }
         }
     ]
 }
