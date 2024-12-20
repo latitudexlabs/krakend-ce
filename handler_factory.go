@@ -6,6 +6,7 @@ import (
 	apikeyauth "github.com/anshulgoel27/krakend-apikey-auth"
 	apikeyauthgin "github.com/anshulgoel27/krakend-apikey-auth/gin"
 	basicauth "github.com/anshulgoel27/krakend-basic-auth/gin"
+	ipfilter "github.com/anshulgoel27/krakend-ipfilter"
 	ratelimit "github.com/anshulgoel27/krakend-ratelimit/v3/router/gin"
 	botdetector "github.com/krakendio/krakend-botdetector/v2/gin"
 	jose "github.com/krakendio/krakend-jose/v2"
@@ -37,6 +38,7 @@ func NewHandlerFactory(logger logging.Logger, metricCollector *metrics.Metrics, 
 	if apiKeyAuthManager != nil {
 		handlerFactory = apikeyauthgin.NewHandlerFactory(apiKeyAuthManager, handlerFactory, logger)
 	}
+	handlerFactory = ipfilter.HandlerFactory(handlerFactory, logger)
 
 	return func(cfg *config.EndpointConfig, p proxy.Proxy) gin.HandlerFunc {
 		logger.Debug(fmt.Sprintf("[ENDPOINT: %s] Building the http handler", cfg.Endpoint))

@@ -228,6 +228,11 @@
                     "roles": [
                         "admin"
                     ]
+                },
+                "github_com/anshulgoel27/krakend-ipfilter": {
+                    "deny": [
+                        "127.0.0.1"
+                    ]
                 }
             }
         },
