@@ -128,6 +128,8 @@ github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b h1
 github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b/go.mod h1:ZhCl0tkflydxN27I9Ez7UkZYnOzEyB64r5j5nKwAOcU=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241220161853-67f784206c3b h1:YU2lEZaDeMbso51YrJydDJmZ9o3OOQ85+sFRcLtl2/Q=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241220161853-67f784206c3b/go.mod h1:RIiyy1hOGCr4BH3xFgWe3y21zT4u6C1V+6+e+4icXLY=
+github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241221192853-0b9cf6d60b2c h1:U1czNfPsTikmn47F5ZtLpvGn7arSjR6hVtqAgPhaDPs=
+github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241221192853-0b9cf6d60b2c/go.mod h1:RIiyy1hOGCr4BH3xFgWe3y21zT4u6C1V+6+e+4icXLY=
 github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20241217053714-5ebd55290bfe h1:IBKT1BEAQ10y4rXdwL5nP+5b+ee4u4D+6/WXjYYMIvU=
 github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20241217053714-5ebd55290bfe/go.mod h1:OLjQYICiKgSGJrndKtlboVIA27+LifFrPy8KV9g2c5s=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=

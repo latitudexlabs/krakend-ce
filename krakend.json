@@ -230,7 +230,8 @@
                     ]
                 },
                 "github_com/anshulgoel27/krakend-ipfilter": {
-                    "deny": [
+                    "allow": true,
+                    "cidr": [
                         "127.0.0.1"
                     ]
                 }
