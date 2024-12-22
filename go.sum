@@ -130,6 +130,8 @@ github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241220161853-67f784206c3b h1:Y
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241220161853-67f784206c3b/go.mod h1:RIiyy1hOGCr4BH3xFgWe3y21zT4u6C1V+6+e+4icXLY=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241221192853-0b9cf6d60b2c h1:U1czNfPsTikmn47F5ZtLpvGn7arSjR6hVtqAgPhaDPs=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241221192853-0b9cf6d60b2c/go.mod h1:RIiyy1hOGCr4BH3xFgWe3y21zT4u6C1V+6+e+4icXLY=
+github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241222151355-7a739eb9f124 h1:MAJzVpXKpanS7BeVS7NOn6W26He0piyUiXqe2zWbIwM=
+github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241222151355-7a739eb9f124/go.mod h1:i+Uyq4YyBNpTm2IWtxYev1LioiNfeuZ5tou+R2kZ6qs=
 github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20241217053714-5ebd55290bfe h1:IBKT1BEAQ10y4rXdwL5nP+5b+ee4u4D+6/WXjYYMIvU=
 github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20241217053714-5ebd55290bfe/go.mod h1:OLjQYICiKgSGJrndKtlboVIA27+LifFrPy8KV9g2c5s=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
@@ -590,8 +592,12 @@ github.com/nats-io/nats-server/v2 v2.10.12 h1:G6u+RDrHkw4bkwn7I911O5jqys7jJVRY6M
 github.com/nats-io/nats-server/v2 v2.10.12/go.mod h1:H1n6zXtYLFCgXcf/SF8QNTSIFuS8tyZQMN9NguUHdEs=
 github.com/nats-io/nats.go v1.34.1 h1:syWey5xaNHZgicYBemv0nohUPPmaLteiBEUT6Q5+F/4=
 github.com/nats-io/nats.go v1.34.1/go.mod h1:Ubdu4Nh9exXdSz0RVWRFBbRfrbSxOYd26oF0wkWclB8=
+github.com/nats-io/nats.go v1.38.0 h1:A7P+g7Wjp4/NWqDOOP/K6hfhr54DvdDQUznt5JFg9XA=
+github.com/nats-io/nats.go v1.38.0/go.mod h1:IGUM++TwokGnXPs82/wCuiHS02/aKrdYUQkU8If6yjw=
 github.com/nats-io/nkeys v0.4.7 h1:RwNJbbIdYCoClSDNY7QVKZlyb/wfT6ugvFCiKy6vDvI=
 github.com/nats-io/nkeys v0.4.7/go.mod h1:kqXRgRDPlGy7nGaEDMuYzmiJCIAAWDK0IMBtDmGD0nc=
+github.com/nats-io/nkeys v0.4.9 h1:qe9Faq2Gxwi6RZnZMXfmGMZkg3afLLOtrU+gDZJ35b0=
+github.com/nats-io/nkeys v0.4.9/go.mod h1:jcMqs+FLG+W5YO36OX6wFIFcmpdAns+w1Wm6D3I/evE=
 github.com/nats-io/nuid v1.0.1 h1:5iA8DT8V7q8WK2EScv2padNa/rTESc1KdnPw4TC2paw=
 github.com/nats-io/nuid v1.0.1/go.mod h1:19wcPz3Ph3q0Jbyiqsd0kePYG7A95tJPxeL+1OSON2c=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=

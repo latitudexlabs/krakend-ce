@@ -206,8 +206,9 @@
             ]
         },
         {
-            "endpoint": "/private/{user}",
+            "endpoint": "/event/publish",
             "method": "POST",
+            "input_query_strings": ["topic"],
             "backend": [
                 {
                     "host": ["nats://"],
@@ -215,8 +216,8 @@
                     "encoding": "json",
 
                     "extra_config": {
-                        "backend/pubsub/publisher": {
-                            "topic_url": "event.key.created"
+                        "github_com/anshulgoel27/krakend-nats-publisher": {
+                            "topic_query_key": "topic"
                         }
                     },
                     "url_pattern": "/",
@@ -227,12 +228,6 @@
                 "github_com/anshulgoel27/krakend-apikey-auth": {
                     "roles": [
                         "admin"
-                    ]
-                },
-                "github_com/anshulgoel27/krakend-ipfilter": {
-                    "allow": true,
-                    "cidr": [
-                        "127.0.0.1"
                     ]
                 }
             }

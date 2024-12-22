@@ -15,7 +15,7 @@ import (
 	metrics "github.com/krakendio/krakend-metrics/v2/gin"
 	oauth2client "github.com/krakendio/krakend-oauth2-clientcredentials/v2"
 	opencensus "github.com/krakendio/krakend-opencensus/v2"
-	pubsub "github.com/krakendio/krakend-pubsub/v2"
+	pubsub "github.com/anshulgoel27/krakend-pubsub-nats"
 	ratelimit "github.com/anshulgoel27/krakend-ratelimit/v3/proxy"
 	"github.com/luraproject/lura/v2/config"
 	"github.com/luraproject/lura/v2/logging"
