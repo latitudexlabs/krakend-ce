@@ -17,7 +17,8 @@
                 "-d"
             ],
             "env": {
-                "NATS_SERVER_URL": "localhost:4222"
+                "NATS_SERVER_URL": "localhost:4222",
+                "SHARED_SECRET": "58427514-be32-0b52-b7c6-d01fada30497"
             }
         }
     ]

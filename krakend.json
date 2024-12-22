@@ -46,22 +46,16 @@
         "github_com/anshulgoel27/krakend-apikey-auth": {
             "strategy": "header",
             "identifier": "Authorization",
+            "admin_key_env": "SHARED_SECRET",
             "keys": [
                 {
                     "@plain": "4d2c61e1-34c4-e96c-9456-15bd983c5019",
+                    "@admin": "58427514-be32-0b52-b7c6-d01fada30497",
                     "key": "a6a6d530a77a28fad2359223759d2d2231b516a31de2c09ad046726610f0fd87",
                     "roles": [
                         "user"
                     ],
                     "@description": "ACME Inc."
-                },
-                {
-                    "@plain": "58427514-be32-0b52-b7c6-d01fada30497",
-                    "key": "0d85b6ef02794cbf3fef4506286aaba2d499b1f825a5452d9f3444d50b33b48c",
-                    "roles": [
-                        "admin"
-                    ],
-                    "@description": "Administrators Inc."
                 }
             ]
         }

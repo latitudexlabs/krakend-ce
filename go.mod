@@ -3,7 +3,7 @@ module github.com/krakendio/krakend-ce/v2
 go 1.22.0
 
 require (
-	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241217060413-f10421b740c1
+	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241222164812-540a4d5b25cd
 	github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b
 	github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241221192853-0b9cf6d60b2c
 	github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241222151355-7a739eb9f124
