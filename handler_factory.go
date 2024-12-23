@@ -1,12 +1,14 @@
 package krakend
 
 import (
+	"context"
 	"fmt"
 
 	apikeyauth "github.com/anshulgoel27/krakend-apikey-auth"
 	apikeyauthgin "github.com/anshulgoel27/krakend-apikey-auth/gin"
 	basicauth "github.com/anshulgoel27/krakend-basic-auth/gin"
 	ipfilter "github.com/anshulgoel27/krakend-ipfilter"
+	lognats "github.com/anshulgoel27/krakend-lognats"
 	ratelimit "github.com/anshulgoel27/krakend-ratelimit/v3/router/gin"
 	botdetector "github.com/krakendio/krakend-botdetector/v2/gin"
 	jose "github.com/krakendio/krakend-jose/v2"
@@ -24,9 +26,9 @@ import (
 )
 
 // NewHandlerFactory returns a HandlerFactory with a rate-limit and a metrics collector middleware injected
-func NewHandlerFactory(logger logging.Logger, metricCollector *metrics.Metrics, rejecter jose.RejecterFactory, apiKeyAuthManager *apikeyauth.AuthKeyLookupManager) router.HandlerFactory {
+func NewHandlerFactory(ctx context.Context, logger logging.Logger, metricCollector *metrics.Metrics, rejecter jose.RejecterFactory, apiKeyAuthManager *apikeyauth.AuthKeyLookupManager) router.HandlerFactory {
 	handlerFactory := router.CustomErrorEndpointHandler(logger, server.DefaultToHTTPError)
-
+	handlerFactory = lognats.NewHandlerFactory(ctx, handlerFactory, logger)
 	handlerFactory = ratelimit.NewRateLimiterMw(logger, handlerFactory)
 	handlerFactory = ratelimit.NewTriredRateLimiterMw(logger, handlerFactory)
 	handlerFactory = lua.HandlerFactory(logger, handlerFactory)
@@ -48,6 +50,6 @@ func NewHandlerFactory(logger logging.Logger, metricCollector *metrics.Metrics, 
 
 type handlerFactory struct{}
 
-func (handlerFactory) NewHandlerFactory(l logging.Logger, m *metrics.Metrics, r jose.RejecterFactory, apiKeyAuthManager *apikeyauth.AuthKeyLookupManager) router.HandlerFactory {
-	return NewHandlerFactory(l, m, r, apiKeyAuthManager)
+func (handlerFactory) NewHandlerFactory(ctx context.Context, l logging.Logger, m *metrics.Metrics, r jose.RejecterFactory, apiKeyAuthManager *apikeyauth.AuthKeyLookupManager) router.HandlerFactory {
+	return NewHandlerFactory(ctx, l, m, r, apiKeyAuthManager)
 }

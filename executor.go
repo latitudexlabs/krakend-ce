@@ -106,7 +106,7 @@ type BackendFactory interface {
 
 // HandlerFactory returns a KrakenD router handler factory, ready to be passed to the KrakenD RouterFactory
 type HandlerFactory interface {
-	NewHandlerFactory(logging.Logger, *metrics.Metrics, jose.RejecterFactory, *apikeyauth.AuthKeyLookupManager) router.HandlerFactory
+	NewHandlerFactory(context.Context, logging.Logger, *metrics.Metrics, jose.RejecterFactory, *apikeyauth.AuthKeyLookupManager) router.HandlerFactory
 }
 
 // LoggerFactory returns a KrakenD Logger factory, ready to be passed to the KrakenD RouterFactory
@@ -215,7 +215,7 @@ func (e *ExecutorBuilder) NewCmdExecutor(ctx context.Context) cmd.Executor {
 			logger.Warning("[SERVICE: apikey-auth]", err.Error())
 		}
 
-		handlerF := e.HandlerFactory.NewHandlerFactory(logger, metricCollector, tokenRejecterFactory, apiKeyAuthManager)
+		handlerF := e.HandlerFactory.NewHandlerFactory(ctx, logger, metricCollector, tokenRejecterFactory, apiKeyAuthManager)
 		handlerF = otelgin.New(handlerF)
 
 		runServerChain := serverhttp.RunServerWithLoggerFactory(logger)

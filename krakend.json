@@ -202,20 +202,25 @@
         {
             "endpoint": "/v1/event/publish",
             "method": "POST",
-            "input_query_strings": ["topic"],
+            "input_query_strings": [
+                "topic"
+            ],
             "backend": [
                 {
-                    "host": ["nats://"],
+                    "host": [
+                        "nats://"
+                    ],
                     "disable_host_sanitize": true,
                     "encoding": "json",
-
                     "extra_config": {
                         "github_com/anshulgoel27/krakend-nats-publisher": {
                             "topic_query_key": "topic"
                         }
                     },
                     "url_pattern": "/",
-                    "input_headers": [""]
+                    "input_headers": [
+                        ""
+                    ]
                 }
             ],
             "extra_config": {
@@ -232,7 +237,9 @@
             "timeout": "50ms",
             "backend": [
                 {
-                    "host": ["nats://"],
+                    "host": [
+                        "nats://"
+                    ],
                     "disable_host_sanitize": true,
                     "encoding": "json",
                     "extra_config": {
@@ -241,7 +248,9 @@
                         }
                     },
                     "url_pattern": "/",
-                    "input_headers": [""]
+                    "input_headers": [
+                        ""
+                    ]
                 }
             ],
             "extra_config": {
@@ -312,6 +321,7 @@
         {
             "endpoint": "/adminonly/{user}",
             "method": "GET",
+            "input_headers": ["Accept", "X-Correlation-Id"],
             "backend": [
                 {
                     "host": [
@@ -325,6 +335,9 @@
                 }
             ],
             "extra_config": {
+                "github_com/anshulgoel27/krakend-lognats": {
+                    "log_nats_topic": "event.request.dump"
+                },
                 "github_com/anshulgoel27/krakend-apikey-auth": {
                     "roles": [
                         "admin"
@@ -389,11 +402,15 @@
             "extra_config": {
                 "auth/validator": {
                     "alg": "RS256",
-                    "audience": ["account"],
+                    "audience": [
+                        "account"
+                    ],
                     "jwk_url": "http://localhost:8080/realms/master/protocol/openid-connect/certs",
                     "cache": true,
                     "roles_key": "resource_access.portal-web.roles",
-                    "roles": ["create-key"],
+                    "roles": [
+                        "create-key"
+                    ],
                     "roles_key_is_nested": true,
                     "disable_jwk_security": true
                 }
