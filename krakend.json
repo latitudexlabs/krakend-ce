@@ -4,7 +4,7 @@
     "name": "My lovely gateway",
     "port": 8082,
     "cache_ttl": "3600s",
-    "timeout": "3s",
+    "timeout": "30s",
     "extra_config": {
         "auth/validator": {
             "@comment": "Enable a JWK shared cache amongst all endpoints of 15 minutes",
@@ -200,7 +200,7 @@
             ]
         },
         {
-            "endpoint": "/event/publish",
+            "endpoint": "/v1/event/publish",
             "method": "POST",
             "input_query_strings": ["topic"],
             "backend": [

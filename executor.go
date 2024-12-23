@@ -209,7 +209,7 @@ func (e *ExecutorBuilder) NewCmdExecutor(ctx context.Context) cmd.Executor {
 
 		agentPing := make(chan string, len(cfg.AsyncAgents))
 
-		apiKeyAuthManager, err := apikeyauthgin.NewApiKeyAuthenticator(cfg, logger)
+		apiKeyAuthManager, err := apikeyauthgin.NewApiKeyAuthenticator(ctx, cfg, logger)
 
 		if err != nil {
 			logger.Warning("[SERVICE: apikey-auth]", err.Error())
