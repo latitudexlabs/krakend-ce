@@ -156,6 +156,8 @@ github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241226165718-052144dcd0bc h
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241226165718-052144dcd0bc/go.mod h1:QN9TxpL9prxbTKd4B7LutsvL7F3yugeqp+1pKElAD3M=
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241226171858-c4161681b31c h1:5dZI/s5pLaJr7YIXB+hJpB0x5+Wruzx2XO7eqPExfME=
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241226171858-c4161681b31c/go.mod h1:QN9TxpL9prxbTKd4B7LutsvL7F3yugeqp+1pKElAD3M=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250115133226-f85bf29874c9 h1:d6cv7uY7KanMCOlss7lyvdN89ZjzigB+iANWsJ1xsKY=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250115133226-f85bf29874c9/go.mod h1:QN9TxpL9prxbTKd4B7LutsvL7F3yugeqp+1pKElAD3M=
 github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b h1:6i+nYlK+oJr6VBjIW576sWUmsmiSyb/8Cw12OCeoRhw=
 github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b/go.mod h1:ZhCl0tkflydxN27I9Ez7UkZYnOzEyB64r5j5nKwAOcU=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241220161853-67f784206c3b h1:YU2lEZaDeMbso51YrJydDJmZ9o3OOQ85+sFRcLtl2/Q=
