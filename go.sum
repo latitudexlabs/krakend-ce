@@ -158,6 +158,8 @@ github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241226171858-c4161681b31c h
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20241226171858-c4161681b31c/go.mod h1:QN9TxpL9prxbTKd4B7LutsvL7F3yugeqp+1pKElAD3M=
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250115133226-f85bf29874c9 h1:d6cv7uY7KanMCOlss7lyvdN89ZjzigB+iANWsJ1xsKY=
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250115133226-f85bf29874c9/go.mod h1:QN9TxpL9prxbTKd4B7LutsvL7F3yugeqp+1pKElAD3M=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250115162201-0f443cd9b4fd h1:pwmZyzd+krIQuo72yChRqV/1L5pP4IVPbohstnmPHkM=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250115162201-0f443cd9b4fd/go.mod h1:QN9TxpL9prxbTKd4B7LutsvL7F3yugeqp+1pKElAD3M=
 github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b h1:6i+nYlK+oJr6VBjIW576sWUmsmiSyb/8Cw12OCeoRhw=
 github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b/go.mod h1:ZhCl0tkflydxN27I9Ez7UkZYnOzEyB64r5j5nKwAOcU=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241220161853-67f784206c3b h1:YU2lEZaDeMbso51YrJydDJmZ9o3OOQ85+sFRcLtl2/Q=
@@ -178,6 +180,10 @@ github.com/anshulgoel27/krakend-lognats v0.0.0-20241223140047-29b896066b71 h1:F/
 github.com/anshulgoel27/krakend-lognats v0.0.0-20241223140047-29b896066b71/go.mod h1:/2IapBwfz0X/C+Vt+2t9esWMCeBmFYIX9tEVQY7KqSU=
 github.com/anshulgoel27/krakend-lognats v0.0.0-20241223143108-c46dc64b12b9 h1:r2fh9pJgtCGfQp5Y7v4noSNgMdxZWyN9I6E9ZL7yK38=
 github.com/anshulgoel27/krakend-lognats v0.0.0-20241223143108-c46dc64b12b9/go.mod h1:/2IapBwfz0X/C+Vt+2t9esWMCeBmFYIX9tEVQY7KqSU=
+github.com/anshulgoel27/krakend-lognats v0.0.0-20250115162148-498d860256ae h1:EU0VY88JSW6uvGYQrTkrYgx+mc94AgYQFYrfxjNxIpw=
+github.com/anshulgoel27/krakend-lognats v0.0.0-20250115162148-498d860256ae/go.mod h1:/2IapBwfz0X/C+Vt+2t9esWMCeBmFYIX9tEVQY7KqSU=
+github.com/anshulgoel27/krakend-lognats v0.0.0-20250115162914-9d9ba73d984f h1:m49h03upl9/hrHwL7TnjeE7u5/LbaPU8GMGjhCg/5IY=
+github.com/anshulgoel27/krakend-lognats v0.0.0-20250115162914-9d9ba73d984f/go.mod h1:/2IapBwfz0X/C+Vt+2t9esWMCeBmFYIX9tEVQY7KqSU=
 github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241222151355-7a739eb9f124 h1:MAJzVpXKpanS7BeVS7NOn6W26He0piyUiXqe2zWbIwM=
 github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241222151355-7a739eb9f124/go.mod h1:i+Uyq4YyBNpTm2IWtxYev1LioiNfeuZ5tou+R2kZ6qs=
 github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241223142820-a18ed48de552 h1:THEJlnwQWKT/g4Dtndqc8VbiZJ0jCfNkE+KQTwoGfUo=
