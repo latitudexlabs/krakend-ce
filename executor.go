@@ -14,6 +14,7 @@ import (
 
 	apikeyauth "github.com/anshulgoel27/krakend-apikey-auth"
 	apikeyauthgin "github.com/anshulgoel27/krakend-apikey-auth/gin"
+	krakendrate "github.com/anshulgoel27/krakend-ratelimit/v3"
 	kotel "github.com/krakend/krakend-otel"
 	otellura "github.com/krakend/krakend-otel/lura"
 	otelgin "github.com/krakend/krakend-otel/router/gin"
@@ -106,7 +107,7 @@ type BackendFactory interface {
 
 // HandlerFactory returns a KrakenD router handler factory, ready to be passed to the KrakenD RouterFactory
 type HandlerFactory interface {
-	NewHandlerFactory(context.Context, logging.Logger, *metrics.Metrics, jose.RejecterFactory, *apikeyauth.AuthKeyLookupManager) router.HandlerFactory
+	NewHandlerFactory(context.Context, logging.Logger, *metrics.Metrics, jose.RejecterFactory, *apikeyauth.AuthKeyLookupManager, *krakendrate.RedisConfig) router.HandlerFactory
 }
 
 // LoggerFactory returns a KrakenD Logger factory, ready to be passed to the KrakenD RouterFactory
@@ -215,7 +216,13 @@ func (e *ExecutorBuilder) NewCmdExecutor(ctx context.Context) cmd.Executor {
 			logger.Warning("[SERVICE: apikey-auth]", err.Error())
 		}
 
-		handlerF := e.HandlerFactory.NewHandlerFactory(ctx, logger, metricCollector, tokenRejecterFactory, apiKeyAuthManager)
+		redisConfig, err := krakendrate.RedisConfigGetter(cfg.ExtraConfig)
+
+		if err != nil {
+			logger.Warning("[SERVICE: krakend-rate-redisconfig]", err.Error())
+		}
+
+		handlerF := e.HandlerFactory.NewHandlerFactory(ctx, logger, metricCollector, tokenRejecterFactory, apiKeyAuthManager, redisConfig)
 		handlerF = otelgin.New(handlerF)
 
 		runServerChain := serverhttp.RunServerWithLoggerFactory(logger)
