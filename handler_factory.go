@@ -13,7 +13,6 @@ import (
 	ratelimit "github.com/anshulgoel27/krakend-ratelimit/v3/router/gin"
 	botdetector "github.com/krakendio/krakend-botdetector/v2/gin"
 	jose "github.com/krakendio/krakend-jose/v2"
-	ginjose "github.com/krakendio/krakend-jose/v2/gin"
 	lua "github.com/krakendio/krakend-lua/v2/router/gin"
 	metrics "github.com/krakendio/krakend-metrics/v2/gin"
 	opencensus "github.com/krakendio/krakend-opencensus/v2/router/gin"
@@ -37,13 +36,13 @@ func NewHandlerFactory(ctx context.Context, logger logging.Logger,
 	handlerFactory = ratelimit.NewRateLimiterMw(logger, redisConfig, handlerFactory)
 	handlerFactory = ratelimit.NewTriredRateLimiterMw(logger, redisConfig, handlerFactory)
 	handlerFactory = lua.HandlerFactory(logger, handlerFactory)
-	handlerFactory = ginjose.HandlerFactory(handlerFactory, logger, rejecter)
+	//handlerFactory = ginjose.HandlerFactory(handlerFactory, logger, rejecter)
 	handlerFactory = metricCollector.NewHTTPHandlerFactory(handlerFactory)
 	handlerFactory = opencensus.New(handlerFactory)
 	handlerFactory = botdetector.New(handlerFactory, logger)
 	handlerFactory = basicauth.New(handlerFactory, logger)
 	if apiKeyAuthManager != nil {
-		handlerFactory = apikeyauthgin.NewHandlerFactory(apiKeyAuthManager, handlerFactory, logger)
+		handlerFactory = apikeyauthgin.NewHandlerFactory(apiKeyAuthManager, handlerFactory, logger, rejecter)
 	}
 	handlerFactory = ipfilter.HandlerFactory(handlerFactory, logger)
 

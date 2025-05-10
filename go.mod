@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.3
 
 require (
-	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250305173513-136642137c6a
+	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250510192455-5c9f680cd271
 	github.com/anshulgoel27/krakend-basic-auth v0.0.0-20241115090447-0c51ae323c0b
 	github.com/anshulgoel27/krakend-ipfilter v0.0.0-20241221192853-0b9cf6d60b2c
 	github.com/anshulgoel27/krakend-lognats v0.0.0-20250115162914-9d9ba73d984f
@@ -193,8 +193,8 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/nats-io/nats-server/v2 v2.10.27 // indirect
-	github.com/nats-io/nats.go v1.39.1 // indirect
-	github.com/nats-io/nkeys v0.4.10 // indirect
+	github.com/nats-io/nats.go v1.42.0 // indirect
+	github.com/nats-io/nkeys v0.4.11 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 // indirect
 	github.com/openzipkin/zipkin-go v0.2.5 // indirect
