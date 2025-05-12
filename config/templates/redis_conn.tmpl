@@ -2,7 +2,8 @@
     "connection_pools": [
         {
             "name": "redis_rate_limit_pool",
-            "address": "{{ env "REDIS_URL" }}"
+            "address": "{{ env "REDIS_URL" }}",
+            "password": "{{ env "REDIS_PASSWORD" }}"
         }
     ]
 }

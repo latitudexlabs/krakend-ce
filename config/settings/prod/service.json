@@ -54,6 +54,11 @@
                     "enabled": true
                 }
             ]
+        },
+        "router": {
+            "logger_skip_paths": [
+                 "/__health"
+            ]
         }
     }
 }

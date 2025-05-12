@@ -132,8 +132,8 @@ github.com/anshulgoel27/krakend-lognats v0.0.0-20250115162914-9d9ba73d984f h1:m4
 github.com/anshulgoel27/krakend-lognats v0.0.0-20250115162914-9d9ba73d984f/go.mod h1:/2IapBwfz0X/C+Vt+2t9esWMCeBmFYIX9tEVQY7KqSU=
 github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241223142820-a18ed48de552 h1:THEJlnwQWKT/g4Dtndqc8VbiZJ0jCfNkE+KQTwoGfUo=
 github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20241223142820-a18ed48de552/go.mod h1:i+Uyq4YyBNpTm2IWtxYev1LioiNfeuZ5tou+R2kZ6qs=
-github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250509173802-cd13d9bc5d02 h1:wXsIC4iLlNxz4AP3JkLPXkgV2K3sJ5D1SUuy7oh7Yqw=
-github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250509173802-cd13d9bc5d02/go.mod h1:TZPxjS64oKe26qsVFLzWHdZ/o8mEQN7by9HpmHV3P2c=
+github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250512094007-9abdbfc9cae2 h1:trjJFI+59IkW+NSrn6hphEVW1EBRsG6iIcJkj3FozxA=
+github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250512094007-9abdbfc9cae2/go.mod h1:TZPxjS64oKe26qsVFLzWHdZ/o8mEQN7by9HpmHV3P2c=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/antlr4-go/antlr/v4 v4.13.0 h1:lxCg3LAv+EUK6t1i0y1V6/SLeUi0eKEKdhQAlS8TVTI=
 github.com/antlr4-go/antlr/v4 v4.13.0/go.mod h1:pfChB/xh/Unjila75QW7+VU4TSnWnnk9UTnmpPaOR2g=
