@@ -1,0 +1,23 @@
+{
+    "endpoint": "/api/v1/geocode",
+    "method": "GET",
+    "backend": [
+        {
+            "host": [
+                "https://api.github.com"
+            ],
+            "url_pattern": "/",
+            "allow": [
+                "authorizations_url",
+                "code_search_url"
+            ]
+        }
+    ],
+    "extra_config":  {
+        {{ template "log_dump.tmpl" }},
+        {{ template "api_key_auth.tmpl" }},
+        {{ template "jwt_auth.tmpl" }},
+        {{ template "tiered_rate_limit.tmpl" }},
+        {{ template "circuit_breaker.tmpl" "geocode_cb" }}
+    }
+}

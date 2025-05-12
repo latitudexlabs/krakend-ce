@@ -1,0 +1,39 @@
+{
+    "endpoint": "/api/v1/internal/event/publish",
+    "method": "POST",
+    "input_query_strings": [
+        "topic"
+    ],
+    "backend": [
+        {
+            "host": [
+                "nats://"
+            ],
+            "disable_host_sanitize": true,
+            "encoding": "json",
+            "extra_config": {
+                "github_com/anshulgoel27/krakend-nats-publisher": {
+                    "topic_query_key": "topic"
+                }
+            },
+            "url_pattern": "/",
+            "input_headers": [
+                ""
+            ]
+        }
+    ],
+    "extra_config": {
+        "github_com/anshulgoel27/krakend-apikey-auth": {
+            "roles": [
+                "admin"
+            ]
+        },
+        "qos/circuit-breaker": {
+            "name": "publish_cb",
+            "timeout": 2000,
+            "max_requests": 3,
+            "interval": 60,
+            "error_threshold": 50
+        }
+    }
+}

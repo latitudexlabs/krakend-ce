@@ -1,0 +1,94 @@
+"github_com/anshulgoel27/krakend-ratelimit/tiered": {
+    "tier_key": "X-API-Role",
+    "tiers": [
+        {
+            "tier_value": "admin",
+            "tier_value_as": "literal",
+            "ratelimits": [
+                {
+                    "client_max_rate": 1000,
+                    "client_capacity": 1000,
+                    "every": "1s",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                }
+            ]
+        },
+        {
+            "tier_value": "free-plan",
+            "tier_value_as": "literal",
+            "ratelimits": [
+                {
+                    "client_max_rate": 5,
+                    "client_capacity": 5,
+                    "every": "1s",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                },
+                {
+                    "client_max_rate": 100,
+                    "client_capacity": 100,
+                    "redis_connection_name": "local_redis",
+                    "every": "24h",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                }
+            ]
+        },
+        {
+            "tier_value": "silver-plan",
+            "tier_value_as": "literal",
+            "ratelimits": [
+                {
+                    "client_max_rate": 12,
+                    "client_capacity": 12,
+                    "every": "1s",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                },
+                {
+                    "client_max_rate": 10000,
+                    "client_capacity": 10000,
+                    "redis_connection_name": "local_redis",
+                    "every": "24h",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                }
+            ]
+        },
+        {
+            "tier_value": "gold-plan",
+            "tier_value_as": "literal",
+            "ratelimits": [
+                {
+                    "client_max_rate": 25,
+                    "client_capacity": 25,
+                    "every": "1s",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                },
+                {
+                    "client_max_rate": 100000,
+                    "client_capacity": 100000,
+                    "redis_connection_name": "local_redis",
+                    "every": "24h",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                }
+            ]
+        },
+        {
+            "tier_value": "enterprise-plan",
+            "tier_value_as": "literal",
+            "ratelimits": [
+                {
+                    "client_max_rate": 1000,
+                    "client_capacity": 1000,
+                    "every": "1s",
+                    "strategy": "header",
+                    "key": "X-Org-Id"
+                }
+            ]
+        }
+    ]
+}

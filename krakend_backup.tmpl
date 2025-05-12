@@ -1,0 +1,299 @@
+{
+    "$schema": "https://www.krakend.io/schema/v2.5/krakend.json",
+    "version": 3,
+    "name": "My lovely gateway",
+    "port": 8083,
+    "cache_ttl": "3600s",
+    "timeout": "30s",
+    "extra_config": {
+        "auth/validator": {
+            "@comment": "Enable a JWK shared cache amongst all endpoints of 15 minutes",
+            "shared_cache_duration": 900
+        },
+        "telemetry/logging": {
+            "level": "DEBUG",
+            "prefix": "[KRAKEND]",
+            "syslog": false,
+            "stdout": true
+        },
+        "telemetry/metrics": {
+            "collection_time": "60s",
+            "proxy_disabled": false,
+            "router_disabled": false,
+            "backend_disabled": false,
+            "endpoint_disabled": false,
+            "listen_address": ":8090"
+        },
+        "security/cors": {
+            "allow_origins": [
+                "http://192.168.99.100:3000",
+                "http://localhost:3000"
+            ],
+            "allow_methods": [
+                "POST",
+                "GET"
+            ],
+            "allow_headers": [
+                "Origin",
+                "Authorization",
+                "Content-Type"
+            ],
+            "expose_headers": [
+                "Content-Length"
+            ],
+            "max_age": "12h"
+        },
+        "github_com/anshulgoel27/krakend-apikey-auth": {
+            "strategy": "header",
+            "identifier": "X-API-Key",
+            "admin_key_env": "SHARED_SECRET",
+            "keys": [
+                {
+                    "@plain": "4d2c61e1-34c4-e96c-9456-15bd983c5019",
+                    "@admin": "58427514-be32-0b52-b7c6-d01fada30497",
+                    "key": "a6a6d530a77a28fad2359223759d2d2231b516a31de2c09ad046726610f0fd87",
+                    "roles": [
+                        "silver_plan"
+                    ],
+                    "org_id": "703bee39-6ca0-4c82-baaa-8c570ba84e05",
+                    "org_name": "ACME Inc.",
+                    "user_id": "703bee39-6ca0-4c82-baaa-8c570ba84e05",
+                    "user_email": "test@acme.com",
+                    "enabled": true
+                }
+            ]
+        },
+        "github_com/anshulgoel27/krakend-ratelimit/redis": {
+            "connection_pools": [
+                {
+                    "name": "local_redis",
+                    "address": "localhost:6379"
+                }
+            ]
+        }
+    },
+    "endpoints": [
+        {
+            "endpoint": "/v1/event/publish",
+            "method": "POST",
+            "input_query_strings": [
+                "topic"
+            ],
+            "backend": [
+                {
+                    "host": [
+                        "nats://"
+                    ],
+                    "disable_host_sanitize": true,
+                    "encoding": "json",
+                    "extra_config": {
+                        "github_com/anshulgoel27/krakend-nats-publisher": {
+                            "topic_query_key": "topic"
+                        }
+                    },
+                    "url_pattern": "/",
+                    "input_headers": [
+                        ""
+                    ]
+                }
+            ],
+            "extra_config": {
+                "github_com/anshulgoel27/krakend-apikey-auth": {
+                    "roles": [
+                        "admin"
+                    ]
+                }
+            }
+        },
+        {
+            "endpoint": "/adminonly/{user}",
+            "method": "GET",
+            "input_headers": [
+                "Accept",
+                "X-Correlation-Id"
+            ],
+            "backend": [
+                {
+                    "host": [
+                        "https://api.github.com"
+                    ],
+                    "url_pattern": "/",
+                    "allow": [
+                        "authorizations_url",
+                        "code_search_url"
+                    ]
+                }
+            ],
+            "extra_config": {
+                "github_com/anshulgoel27/krakend-lognats": {
+                    "log_nats_topic": "api.request.dump"
+                },
+                "github_com/anshulgoel27/krakend-apikey-auth": {
+                    "roles": [
+                        "admin"
+                    ]
+                },
+                "github_com/anshulgoel27/krakend-ratelimit/tiered": {
+                    "tier_key": "X-API-Role",
+                    "tiers": [
+                        {
+                            "tier_value": "admin",
+                            "tier_value_as": "literal",
+                            "ratelimits": [
+                                {
+                                    "client_max_rate": 1,
+                                    "client_capacity": 1,
+                                    "every": "1s",
+                                    "strategy": "header",
+                                    "key": "X-Org-Id"
+                                },
+                                {
+                                    "client_max_rate": 2,
+                                    "client_capacity": 2,
+                                    "redis_connection_name": "local_redis",
+                                    "every": "10m",
+                                    "strategy": "header",
+                                    "key": "X-Org-Id"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "endpoint": "/both1/{user}",
+            "method": "GET",
+            "backend": [
+                {
+                    "host": [
+                        "https://api.github.com"
+                    ],
+                    "url_pattern": "/",
+                    "allow": [
+                        "authorizations_url",
+                        "code_search_url"
+                    ]
+                }
+            ],
+            "extra_config": {
+                "github_com/anshulgoel27/krakend-lognats": {
+                    "log_nats_topic": "api.request.dump"
+                },
+                "github_com/anshulgoel27/krakend-apikey-auth": {
+                    "roles": [
+                        "admin"
+                    ]
+                },
+                "auth/validator": {
+                    "alg": "RS256",
+                    "audience": [
+                        "account"
+                    ],
+                    "jwk_url": "http://localhost:9090/realms/intellipins/protocol/openid-connect/certs",
+                    "cache": true,
+                    "roles_key": "subscription_info.subscription_plan_name",
+                    "roles": [
+                        "admin"
+                    ],
+                    "scopes_key": "subscription_info.subscription_plan_name",
+                    "scopes_matcher": "all",
+                    "scopes": [
+                        "active"
+                    ],
+                    "propagate_claims": [
+                        [
+                            "subscription_info.subscription_plan_name",
+                            "X-API-Role"
+                        ],
+                        [
+                            "email",
+                            "X-User-Email"
+                        ],
+                        [
+                            "user_id",
+                            "X-User-Id"
+                        ],
+                        [
+                            "user_organization.org_name",
+                            "X-Org-Name"
+                        ],
+                        [
+                            "user_organization.org_id",
+                            "X-Org-Id"
+                        ]
+                    ],
+                    "roles_key_is_nested": true,
+                    "disable_jwk_security": true
+                }
+            }
+        },
+        {
+            "endpoint": "/both2/{user}",
+            "method": "GET",
+            "backend": [
+                {
+                    "host": [
+                        "https://api.github.com"
+                    ],
+                    "url_pattern": "/",
+                    "allow": [
+                        "authorizations_url",
+                        "code_search_url"
+                    ]
+                }
+            ],
+            "extra_config": {
+                "github_com/anshulgoel27/krakend-lognats": {
+                    "log_nats_topic": "api.request.dump"
+                },
+                "github_com/anshulgoel27/krakend-apikey-auth": {
+                    "roles": [
+                        "admin"
+                    ]
+                },
+                "auth/validator": {
+                    "alg": "RS256",
+                    "audience": [
+                        "account"
+                    ],
+                    "jwk_url": "http://localhost:9090/realms/intellipins/protocol/openid-connect/certs",
+                    "cache": true,
+                    "roles_key": "subscription_info.subscription_plan_name",
+                    "roles": [
+                        "admin"
+                    ],
+                    "scopes_key": "subscription_info.subscription_plan_name",
+                    "scopes_matcher": "all",
+                    "scopes": [
+                        "active"
+                    ],
+                    "propagate_claims": [
+                        [
+                            "subscription_info.subscription_plan_name",
+                            "X-API-Role"
+                        ],
+                        [
+                            "email",
+                            "X-User-Email"
+                        ],
+                        [
+                            "user_id",
+                            "X-User-Id"
+                        ],
+                        [
+                            "user_organization.org_name",
+                            "X-Org-Name"
+                        ],
+                        [
+                            "user_organization.org_id",
+                            "X-Org-Id"
+                        ]
+                    ],
+                    "roles_key_is_nested": true,
+                    "disable_jwk_security": true
+                }
+            }
+        }
+    ]
+}

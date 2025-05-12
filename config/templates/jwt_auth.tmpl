@@ -1,0 +1,42 @@
+"auth/validator": {
+    "alg": "RS256",
+    "audience": [
+        "account"
+    ],
+    "jwk_url": "http://localhost:9090/realms/intellipins/protocol/openid-connect/certs",
+    "cache": true,
+    "cache_duration": 3600,
+    "roles_key": "subscription_info.subscription_plan_name",
+    "roles": [
+        "admin"
+    ],
+    "scopes_key": "subscription_info.subscription_plan_name",
+    "scopes_matcher": "all",
+    "scopes": [
+        "active"
+    ],
+    "propagate_claims": [
+        [
+            "subscription_info.subscription_plan_name",
+            "X-API-Role"
+        ],
+        [
+            "email",
+            "X-User-Email"
+        ],
+        [
+            "user_id",
+            "X-User-Id"
+        ],
+        [
+            "user_organization.org_name",
+            "X-Org-Name"
+        ],
+        [
+            "user_organization.org_id",
+            "X-Org-Id"
+        ]
+    ],
+    "roles_key_is_nested": true,
+    "disable_jwk_security": true
+}
