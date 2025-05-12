@@ -5,7 +5,12 @@
   "port": {{ .service.port }},
   "timeout": "{{ .service.timeout }}",
   "cache_ttl":  "{{ .service.cache_ttl }}",
-  "extra_config": {{ marshal .service.extra_config }},
+  "extra_config": {
+    {{ range $key, $value := .service.extra_config }}
+        {{ $key | quote }}: {{ marshal $value }},
+    {{ end }}
+    {{ template "redis_conn.tmpl" }}
+  },
   "endpoints": [
     {{ template "endpoints.tmpl" . }}
  ]

@@ -54,14 +54,6 @@
                     "enabled": true
                 }
             ]
-        },
-        "github_com/anshulgoel27/krakend-ratelimit/redis": {
-            "connection_pools": [
-                {
-                    "name": "redis_rate_limit_pool",
-                    "address": "localhost:6379"
-                }
-            ]
         }
     }
 }
