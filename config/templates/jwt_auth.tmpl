@@ -3,7 +3,7 @@
     "audience": [
         "account"
     ],
-    "jwk_url": "http://localhost:9090/realms/intellipins/protocol/openid-connect/certs",
+    "jwk_url": "{{ env "KEYCLOAK_SERVICE_URL" }}/realms/intellipins/protocol/openid-connect/certs",
     "cache": true,
     "cache_duration": 3600,
     "roles_key": "subscription_info.subscription_plan_name",
