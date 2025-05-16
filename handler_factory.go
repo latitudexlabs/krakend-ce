@@ -6,7 +6,6 @@ import (
 
 	apikeyauth "github.com/anshulgoel27/krakend-apikey-auth"
 	apikeyauthgin "github.com/anshulgoel27/krakend-apikey-auth/gin"
-	basicauth "github.com/anshulgoel27/krakend-basic-auth/gin"
 	ipfilter "github.com/anshulgoel27/krakend-ipfilter"
 	lognats "github.com/anshulgoel27/krakend-lognats"
 	krakendrate "github.com/anshulgoel27/krakend-ratelimit/v3"
@@ -40,7 +39,6 @@ func NewHandlerFactory(ctx context.Context, logger logging.Logger,
 	handlerFactory = metricCollector.NewHTTPHandlerFactory(handlerFactory)
 	handlerFactory = opencensus.New(handlerFactory)
 	handlerFactory = botdetector.New(handlerFactory, logger)
-	handlerFactory = basicauth.New(handlerFactory, logger)
 	if apiKeyAuthManager != nil {
 		handlerFactory = apikeyauthgin.NewHandlerFactory(apiKeyAuthManager, handlerFactory, logger, rejecter)
 	}
