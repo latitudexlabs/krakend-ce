@@ -1,0 +1,119 @@
+{
+  "endpoint": "/api/v1/api/usage",
+  "method": "GET",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "input_query_strings": [
+        "date"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/api/v1/api/usage",
+      "host": [
+        "{{ env "ADMIN_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "api_usage" }},
+    {{ template "jwt_auth.tmpl" }},
+    "qos/ratelimit/router": {
+      "every": "1s",
+      "client_max_rate": 10,
+      "strategy": "header",
+      "key": "X-Org-Id",
+      "client_capacity": 10
+    }
+  }
+},
+{
+  "endpoint": "/api/v1/keys",
+  "method": "GET",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/api/v1/keys",
+      "host": [
+        "{{ env "ADMIN_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "api_keys" }},
+    {{ template "jwt_auth.tmpl" }},
+    "qos/ratelimit/router": {
+      "every": "1s",
+      "client_max_rate": 10,
+      "strategy": "header",
+      "key": "X-Org-Id",
+      "client_capacity": 10
+    }
+  }
+},
+{
+  "endpoint": "/api/v1/key/generate",
+  "method": "POST",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/api/v1/key/generate",
+      "host": [
+        "{{ env "ADMIN_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "generate_key" }},
+    {{ template "jwt_auth.tmpl" }},
+    "qos/ratelimit/router": {
+      "every": "1s",
+      "client_max_rate": 5,
+      "strategy": "header",
+      "key": "X-Org-Id",
+      "client_capacity": 5
+    }
+  }
+},
+{
+  "endpoint": "/api/v1/key/{key_label}",
+  "method": "DELETE",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/api/v1/key/{key_label}",
+      "host": [
+        "{{ env "KEYCLOAK_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "delete_key" }},
+    {{ template "jwt_auth.tmpl" }},
+    "qos/ratelimit/router": {
+      "every": "1s",
+      "client_max_rate": 5,
+      "strategy": "header",
+      "key": "X-Org-Id",
+      "client_capacity": 5
+    }
+  }
+}

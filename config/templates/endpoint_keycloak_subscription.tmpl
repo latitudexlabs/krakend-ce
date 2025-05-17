@@ -1,0 +1,110 @@
+{
+  "endpoint": "/api/v1/subscription",
+  "method": "POST",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/realms/intellipins/org/subscription",
+      "host": [
+        "{{ env "KEYCLOAK_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "create_subs" }},
+    {{ template "keycloak_rate_limit.tmpl" }}
+  }
+},
+{
+  "endpoint": "/api/v1/subscription/cancel",
+  "method": "POST",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/realms/intellipins/org/subscription/cancel",
+      "host": [
+        "{{ env "KEYCLOAK_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "cancel_subs" }},
+    {{ template "keycloak_rate_limit.tmpl" }}
+  }
+},
+{
+  "endpoint": "/api/v1/subscription/verify",
+  "method": "POST",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/realms/intellipins/org/subscription/verify",
+      "host": [
+        "{{ env "KEYCLOAK_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "verify_subs" }},
+    {{ template "keycloak_rate_limit.tmpl" }}
+  }
+},
+{
+  "endpoint": "/api/v1/subscription/invoices",
+  "method": "GET",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/realms/intellipins/org/subscription/invoices",
+      "host": [
+        "{{ env "KEYCLOAK_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "subs_invoices" }},
+    {{ template "keycloak_rate_limit.tmpl" }}
+  }
+},
+{
+  "endpoint": "/api/v1/subscription/invoices/{invoiceId}/download",
+  "method": "GET",
+  "output_encoding": "no-op",
+  "input_headers":[
+      "Content-Type",
+      "Accept-Encoding",
+      "Authorization"
+  ],
+  "backend": [
+    {
+      "url_pattern": "/realms/intellipins/org/subscription/invoices/{invoiceId}/download",
+      "host": [
+        "{{ env "KEYCLOAK_SERVICE_URL" }}"
+      ]
+    }
+  ],
+  "extra_config": {
+    {{ template "circuit_breaker.tmpl" "subs_invoice_down" }},
+    {{ template "keycloak_rate_limit.tmpl" }}
+  }
+}
