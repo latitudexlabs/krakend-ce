@@ -38,22 +38,7 @@
         "github_com/anshulgoel27/krakend-apikey-auth": {
             "strategy": "header",
             "identifier": "X-API-Key",
-            "admin_key_env": "SHARED_SECRET",
-            "keys": [
-                {
-                    "@plain": "4d2c61e1-34c4-e96c-9456-15bd983c5019",
-                    "@admin": "58427514-be32-0b52-b7c6-d01fada30497",
-                    "key": "a6a6d530a77a28fad2359223759d2d2231b516a31de2c09ad046726610f0fd87",
-                    "roles": [
-                        "silver_plan"
-                    ],
-                    "org_id": "703bee39-6ca0-4c82-baaa-8c570ba84e05",
-                    "org_name": "ACME Inc.",
-                    "user_id": "703bee39-6ca0-4c82-baaa-8c570ba84e05",
-                    "user_email": "test@acme.com",
-                    "enabled": true
-                }
-            ]
+            "admin_key_env": "SHARED_SECRET"
         },
         "router": {
             "logger_skip_paths": [
