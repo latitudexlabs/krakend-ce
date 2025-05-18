@@ -17,26 +17,4 @@
       "skip_next": false
     }
   }
-},
-{
-  "endpoint": "/api/v1/api/plan",
-  "method": "GET",
-  "output_encoding": "no-op",
-  "input_headers":[
-      "Content-Type",
-      "Accept-Encoding",
-      "Authorization"
-  ],
-  "backend": [
-    {
-      "url_pattern": "/realms/intellipins/org/api-plan",
-      "host": [
-        "{{ env "KEYCLOAK_SERVICE_URL" }}"
-      ]
-    }
-  ],
-  "extra_config": {
-    {{ template "circuit_breaker.tmpl" "api_plan" }},
-    {{ template "keycloak_rate_limit.tmpl" }}
-  }
 }
