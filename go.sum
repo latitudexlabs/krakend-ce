@@ -122,12 +122,8 @@ github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137/go.mod h1:OMCwj8V
 github.com/andybalholm/cascadia v1.3.1/go.mod h1:R4bJ1UQfqADjvDa4P6HZHLh/3OxWWEqc0Sk8XGwHqvA=
 github.com/andybalholm/cascadia v1.3.2 h1:3Xi6Dw5lHF15JtdcmAHD3i1+T8plmv7BQ/nsViSLyss=
 github.com/andybalholm/cascadia v1.3.2/go.mod h1:7gtRlve5FxPPgIgX36uWBX58OdBsSS6lUvCFb+h7KvU=
-github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250510192455-5c9f680cd271 h1:kVF/mT+Sn2z7s4jNSrS9YtaraNpKdLAWghVT8OmG32o=
-github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250510192455-5c9f680cd271/go.mod h1:lczz1oGzFaY+MIZJwT9W//V4WDG2xk943wjjnwJbDQc=
-github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250518164128-1386e204d5dc h1:eLKGUFt/XSqmy+1t7rTZzPPlGWxt9J/OvTaxntJ+vss=
-github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250518164128-1386e204d5dc/go.mod h1:lczz1oGzFaY+MIZJwT9W//V4WDG2xk943wjjnwJbDQc=
-github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250518171721-4365447ab07b h1:mmZ91Yvpes7Kf9GLrtBI31swIYAY8yhE5eu//IG3mYI=
-github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250518171721-4365447ab07b/go.mod h1:lczz1oGzFaY+MIZJwT9W//V4WDG2xk943wjjnwJbDQc=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250520145315-3d2798e7dcf0 h1:gRCmcSIQEheXt9x9UDk0WzwH5Ux6v923CnZjSEm9PDk=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250520145315-3d2798e7dcf0/go.mod h1:lczz1oGzFaY+MIZJwT9W//V4WDG2xk943wjjnwJbDQc=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143 h1:XC6J1Ze4gSlWit0NJbQuzpZ7ZD4Bhm3cdC+60H9lBhE=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143/go.mod h1:LJmDj4oBHnfIRk+3UBqrHdrsirwlQV1NpXWiG4JmkE8=
 github.com/anshulgoel27/krakend-lognats v0.0.0-20250516161207-6ae2c7e2cc1b h1:ubA0D0dHeOc20zf+IR3JNg3O9AW4ocFIpO4eflWt5NA=
