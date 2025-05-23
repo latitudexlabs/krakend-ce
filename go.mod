@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.3
 
 require (
-	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250520145315-3d2798e7dcf0
+	github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250523114829-31f9c655aecd
 	github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143
 	github.com/anshulgoel27/krakend-lognats v0.0.0-20250516161207-6ae2c7e2cc1b
 	github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20250516080014-c6aca463b517

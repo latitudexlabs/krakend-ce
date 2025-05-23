@@ -124,6 +124,8 @@ github.com/andybalholm/cascadia v1.3.2 h1:3Xi6Dw5lHF15JtdcmAHD3i1+T8plmv7BQ/nsVi
 github.com/andybalholm/cascadia v1.3.2/go.mod h1:7gtRlve5FxPPgIgX36uWBX58OdBsSS6lUvCFb+h7KvU=
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250520145315-3d2798e7dcf0 h1:gRCmcSIQEheXt9x9UDk0WzwH5Ux6v923CnZjSEm9PDk=
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250520145315-3d2798e7dcf0/go.mod h1:lczz1oGzFaY+MIZJwT9W//V4WDG2xk943wjjnwJbDQc=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250523114829-31f9c655aecd h1:dqW8jXLDx52vzx1cvkAbu+7teUKOSgztfYkzm+I3mkk=
+github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250523114829-31f9c655aecd/go.mod h1:lczz1oGzFaY+MIZJwT9W//V4WDG2xk943wjjnwJbDQc=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143 h1:XC6J1Ze4gSlWit0NJbQuzpZ7ZD4Bhm3cdC+60H9lBhE=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143/go.mod h1:LJmDj4oBHnfIRk+3UBqrHdrsirwlQV1NpXWiG4JmkE8=
 github.com/anshulgoel27/krakend-lognats v0.0.0-20250516161207-6ae2c7e2cc1b h1:ubA0D0dHeOc20zf+IR3JNg3O9AW4ocFIpO4eflWt5NA=
