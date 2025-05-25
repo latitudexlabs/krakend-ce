@@ -12,13 +12,21 @@ on:
         required: false
         default: false
         type: boolean
+      environment:
+        description: "Deployment environment"
+        required: false
+        default: "prod"
+        type: choice
+        options:
+          - prod
+          - dev
   
 jobs:
 
   build:
     name: Build and publish Docker image
     runs-on: ubuntu-latest
-    environment: prod
+    environment: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || 'prod' }}
 
     steps:
     - name: Checkout code
