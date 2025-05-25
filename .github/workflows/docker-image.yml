@@ -58,7 +58,7 @@ jobs:
     - name: Build multi-arch Docker image
       uses: docker/build-push-action@v6
       with:
-        platforms: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.platforms || 'linux/amd64,linux/arm64' }}
+        platforms: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.platforms || 'linux/amd64' }}
         context: .
         file: Dockerfile
         tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
