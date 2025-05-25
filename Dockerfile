@@ -12,7 +12,7 @@ RUN make build
 
 FROM alpine:${ALPINE_VERSION}
 
-LABEL maintainer="community@krakend.io"
+LABEL maintainer="developer@intellipins.com"
 
 RUN apk upgrade --no-cache --no-interactive && apk add --no-cache ca-certificates tzdata && \
     adduser -u 1000 -S -D -H krakend && \
@@ -28,4 +28,4 @@ WORKDIR /etc/krakend
 ENTRYPOINT [ "/usr/bin/krakend" ]
 CMD [ "run", "-c", "/etc/krakend/krakend.json" ]
 
-EXPOSE 8000 8090
+EXPOSE 8080
