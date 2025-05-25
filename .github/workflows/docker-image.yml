@@ -5,7 +5,13 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  workflow_dispatch: # Enables manual trigger
+  workflow_dispatch:
+    inputs:
+      push_image:
+        description: "Push image to OCIR?"
+        required: false
+        default: false
+        type: boolean
   
 jobs:
 
@@ -28,28 +34,24 @@ jobs:
       
     - name: Set IMAGE_TAG
       id: vars
-      run: echo "tag=$(date +%s)" >> $GITHUB_OUTPUT
+      run: echo "tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
 
     - name: Login to Oracle Cloud Infrastructure Registry (OCIR)
       run: |
         echo "${{ secrets.OCIR_AUTH_TOKEN }}" | docker login -u "${{ secrets.OCIR_NAMESPACE }}/${{ secrets.OCIR_USER_MAIL }}" ${{ secrets.OCI_REGION }}.ocir.io --password-stdin     
 
-    - name: Build Docker image
+    - name: Build multi-arch Docker image
       uses: docker/build-push-action@v6
       with:
-        platforms: linux/arm64
+        platforms: linux/amd64,linux/arm64
         context: .
         file: Dockerfile
-        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
-        push: false
-        load: true
+        tags: |
+          ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
+          ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:latest
+        push: ${{ github.event.inputs.push_image == 'true' }}
         cache-from: type=gha
-        cache-to: type=gha,mode=max  
+        cache-to: type=gha,mode=max
         build-args: |
           GOLANG_VERSION=1.24.3
-          ALPINE_VERSION=3.21 
-        
-    - name: Push Docker Image to Oracle Cloud Registry
-      run: |
-        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
-    
+          ALPINE_VERSION=3.21
