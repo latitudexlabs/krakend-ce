@@ -12,6 +12,7 @@ jobs:
   build:
     name: Build and publish Docker image
     runs-on: ubuntu-latest
+    environment: prod
 
     steps:
     - name: Checkout code
@@ -22,7 +23,7 @@ jobs:
       
     - name: Login to Oracle Cloud Infrastructure Registry (OCIR)
       run: |
-        echo "${{ secrets.OCI_AUTH_TOKEN }}" | docker login -u "${{ secrets.OCI_NAMESPACE }}/${{ secrets.OCI_USER_MAIL }}" ${{ secrets.OCI_REGION }}.ocir.io --password-stdin     
+        echo "${{ secrets.OCIR_AUTH_TOKEN }}" | docker login -u "${{ secrets.OCIR_NAMESPACE }}/${{ secrets.OCIR_USER_MAIL }}" ${{ secrets.OCI_REGION }}.ocir.io --password-stdin     
 
     - name: Build Docker image
       uses: docker/build-push-action@v6
@@ -30,7 +31,7 @@ jobs:
         platforms: linux/arm64
         context: app
         file: app/Dockerfile
-        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCI_NAMESPACE }}/${{ secrets.NAME_REPO }}/my-survey-app:latest
+        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:$(date +%s)
         push: false
         load: true
         cache-from: type=gha
@@ -38,5 +39,5 @@ jobs:
         
     - name: Push Docker Image to Oracle Cloud Registry
       run: |
-        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCI_NAMESPACE }}/${{ secrets.NAME_REPO }}/my-survey-app:$(date +%s) 
+        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:$(date +%s) 
     
