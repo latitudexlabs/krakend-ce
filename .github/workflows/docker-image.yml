@@ -61,9 +61,7 @@ jobs:
         platforms: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.platforms || 'linux/amd64,linux/arm64' }}
         context: .
         file: Dockerfile
-        tags: |
-          ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
-          ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:latest
+        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
         push: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
