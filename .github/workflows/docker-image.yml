@@ -55,7 +55,7 @@ jobs:
         tags: |
           ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
           ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:latest
-        push: ${{ github.event.inputs.push_image == 'true' }}
+        push: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
