@@ -20,6 +20,15 @@ on:
         options:
           - prod
           - dev
+      platforms:
+        description: "Target platforms"
+        required: false
+        default: "linux/amd64,linux/arm64"
+        type: choice
+        options:
+          - linux/amd64
+          - linux/arm64
+          - linux/amd64,linux/arm64
   
 jobs:
 
@@ -49,7 +58,7 @@ jobs:
     - name: Build multi-arch Docker image
       uses: docker/build-push-action@v6
       with:
-        platforms: linux/amd64,linux/arm64
+        platforms: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.platforms || 'linux/amd64,linux/arm64' }}
         context: .
         file: Dockerfile
         tags: |
