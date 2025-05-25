@@ -39,7 +39,10 @@ jobs:
         push: false
         load: true
         cache-from: type=gha
-        cache-to: type=gha,mode=max   
+        cache-to: type=gha,mode=max  
+        build-args: |
+          GOLANG_VERSION=1.24.3
+          ALPINE_VERSION=3.21 
         
     - name: Push Docker Image to Oracle Cloud Registry
       run: |
