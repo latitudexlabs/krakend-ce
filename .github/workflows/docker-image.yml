@@ -52,7 +52,7 @@ jobs:
       run: |
         echo "${{ secrets.OCIR_AUTH_TOKEN }}" | docker login -u "${{ secrets.OCIR_NAMESPACE }}/${{ secrets.OCIR_USER_MAIL }}" ${{ secrets.OCI_REGION }}.ocir.io --password-stdin     
 
-    - name: Build ARM64 image
+    - name: Build AMD64 image
       uses: docker/build-push-action@v6
       with:
         platforms: linux/amd64
@@ -99,3 +99,27 @@ jobs:
         build-args: |
           GOLANG_VERSION=1.24.3
           ALPINE_VERSION=3.21
+
+  create-manifest:
+    name: Create and Push Docker Manifest
+    runs-on: ubuntu-latest
+    needs: [build-amd64, build-arm64]
+    if: github.event_name == 'workflow_dispatch' && contains(github.event.inputs.platforms, ',') && github.event.inputs.push_image == 'true'
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+    - name: Set IMAGE_TAG (reuse tag logic)
+      id: vars
+      run: echo "tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+
+    - name: Login to Oracle Cloud Infrastructure Registry (OCIR)
+      run: |
+        echo "${{ secrets.OCIR_AUTH_TOKEN }}" | docker login -u "${{ secrets.OCIR_NAMESPACE }}/${{ secrets.OCIR_USER_MAIL }}" ${{ secrets.OCI_REGION }}.ocir.io --password-stdin
+
+    - name: Create and push manifest
+      run: |
+        docker manifest create ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }} \
+          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') \
+          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "arm64") | .digest')
+
+        docker manifest push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
