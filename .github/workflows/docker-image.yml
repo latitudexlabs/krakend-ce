@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: build-image-ci
 
 on:
   push:
@@ -29,7 +29,10 @@ on:
           - linux/amd64
           - linux/arm64
           - linux/amd64,linux/arm64
-  
+
+env:
+  IMAGE_NAME: krakend
+
 jobs:
   build-amd64:
     name: Build AMD64 Docker Image
@@ -58,13 +61,14 @@ jobs:
         platforms: linux/amd64
         context: .
         file: Dockerfile
-        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
+        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
         push: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
           GOLANG_VERSION=1.24.3
           ALPINE_VERSION=3.21
+
   build-arm64:
     name: Build ARM64 Docker Image
     runs-on: ubuntu-24.04-arm
@@ -92,7 +96,7 @@ jobs:
         platforms: linux/arm64
         context: .
         file: Dockerfile
-        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
+        tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
         push: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
@@ -108,7 +112,7 @@ jobs:
     environment: ${{ github.event.inputs.environment }}
 
     steps:
-    - name: Set IMAGE_TAG (reuse tag logic)
+    - name: Set IMAGE_TAG
       id: vars
       run: echo "tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
 
@@ -118,8 +122,8 @@ jobs:
 
     - name: Create and push manifest
       run: |
-        docker manifest create ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }} \
-          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') \
-          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "arm64") | .digest')
+        docker manifest create ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }} \
+          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') \
+          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "arm64") | .digest')
 
-        docker manifest push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/krakend:${{ steps.vars.outputs.tag }}
+        docker manifest push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
