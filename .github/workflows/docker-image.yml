@@ -49,7 +49,7 @@ jobs:
       
     - name: Set IMAGE_TAG
       id: vars
-      run: echo "tag=${{ github.run_number }}-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+      run: echo "tag=${{ github.run_number }}$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
     - name: Login to Oracle Cloud Infrastructure Registry (OCIR)
       run: |
@@ -73,7 +73,7 @@ jobs:
     - name: Push Docker Image to Oracle Cloud Registry
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
       run: |
-        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCI_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
+        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
 
   build-arm64:
     name: Build ARM64 Docker Image
@@ -90,7 +90,7 @@ jobs:
       
     - name: Set IMAGE_TAG
       id: vars
-      run: echo "tag=${{ github.run_number }}-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+      run: echo "tag=${{ github.run_number }}$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
     - name: Login to Oracle Cloud Infrastructure Registry (OCIR)
       run: |
@@ -114,4 +114,4 @@ jobs:
     - name: Push Docker Image to Oracle Cloud Registry
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
       run: |
-        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCI_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
+        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
