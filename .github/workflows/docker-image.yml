@@ -62,12 +62,18 @@ jobs:
         context: .
         file: Dockerfile
         tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
-        push: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
+        push: false
+        load: true
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
           GOLANG_VERSION=1.24.3
           ALPINE_VERSION=3.21
+
+    - name: Push Docker Image to Oracle Cloud Registry
+      if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
+      run: |
+        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCI_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
 
   build-arm64:
     name: Build ARM64 Docker Image
@@ -97,33 +103,15 @@ jobs:
         context: .
         file: Dockerfile
         tags: ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
-        push: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
+        push: false
+        load: true
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
           GOLANG_VERSION=1.24.3
           ALPINE_VERSION=3.21
 
-  create-manifest:
-    name: Create and Push Docker Manifest
-    runs-on: ubuntu-latest
-    needs: [build-amd64, build-arm64]
-    if: github.event_name == 'workflow_dispatch' && contains(github.event.inputs.platforms, ',') && github.event.inputs.push_image == 'true'
-    environment: ${{ github.event.inputs.environment }}
-
-    steps:
-    - name: Set IMAGE_TAG
-      id: vars
-      run: echo "tag=${{ github.run_number }}-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
-
-    - name: Login to Oracle Cloud Infrastructure Registry (OCIR)
+    - name: Push Docker Image to Oracle Cloud Registry
+      if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.push_image || false }}
       run: |
-        echo "${{ secrets.OCIR_AUTH_TOKEN }}" | docker login -u "${{ secrets.OCIR_NAMESPACE }}/${{ secrets.OCIR_USER_MAIL }}" ${{ secrets.OCI_REGION }}.ocir.io --password-stdin
-
-    - name: Create and push manifest
-      run: |
-        docker manifest create ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }} \
-          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest') \
-          --amend ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}@$(docker buildx imagetools inspect ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }} --raw | jq -r '.manifests[] | select(.platform.architecture == "arm64") | .digest')
-
-        docker manifest push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCIR_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
+        docker push ${{ secrets.OCI_REGION }}.ocir.io/${{ secrets.OCI_NAMESPACE }}/${{ secrets.NAME_REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
