@@ -126,14 +126,10 @@ github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250523181430-d1c3e2535be7 h
 github.com/anshulgoel27/krakend-apikey-auth v0.0.0-20250523181430-d1c3e2535be7/go.mod h1:lczz1oGzFaY+MIZJwT9W//V4WDG2xk943wjjnwJbDQc=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143 h1:XC6J1Ze4gSlWit0NJbQuzpZ7ZD4Bhm3cdC+60H9lBhE=
 github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143/go.mod h1:LJmDj4oBHnfIRk+3UBqrHdrsirwlQV1NpXWiG4JmkE8=
-github.com/anshulgoel27/krakend-lognats v0.0.0-20250516161207-6ae2c7e2cc1b h1:ubA0D0dHeOc20zf+IR3JNg3O9AW4ocFIpO4eflWt5NA=
-github.com/anshulgoel27/krakend-lognats v0.0.0-20250516161207-6ae2c7e2cc1b/go.mod h1:tl2MI9xEitJK68rgxi9m2SPd6GqwZyYFNplWmaywjy8=
 github.com/anshulgoel27/krakend-lognats v0.0.0-20250603121510-ee5f882322ac h1:UZBvu0JuLG2NHxX1/g4wlAQhqXVtxWKIydIKtrhD4t8=
 github.com/anshulgoel27/krakend-lognats v0.0.0-20250603121510-ee5f882322ac/go.mod h1:tl2MI9xEitJK68rgxi9m2SPd6GqwZyYFNplWmaywjy8=
 github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20250525073633-56946f710f12 h1:QUtGVR2ur8o66/s69DJ/vThoIcd/ozP7ZBV+tDEpmXU=
 github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20250525073633-56946f710f12/go.mod h1:5UUbPq+DnQUP9Y3gK4B8OgBK8r4jD4Zf9faopxNRjD8=
-github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250525075645-71c181ddf055 h1:kYaEhdQpubFlsyiysj4fMfb9RQo6joU6il8BCP8+GtQ=
-github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250525075645-71c181ddf055/go.mod h1:ZrMLbmDsCifA0CtaLVHHusQAnaXG4Qfmah037gcjL6E=
 github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250603124124-2247e3bcf51c h1:SgGP6k5mRhhC3gMHqOHnF/0KeBJlakk+9gWERRXT2fI=
 github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250603124124-2247e3bcf51c/go.mod h1:ZrMLbmDsCifA0CtaLVHHusQAnaXG4Qfmah037gcjL6E=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
@@ -679,8 +675,8 @@ github.com/redis/go-redis/v9 v9.8.0 h1:q3nRvjrlge/6UD7eTu/DSg2uYiU2mCL0G/uzBWqhi
 github.com/redis/go-redis/v9 v9.8.0/go.mod h1:huWgSWd8mW6+m0VPhJjSSQ+d6Nh1VICQ6Q5lHuCH/Iw=
 github.com/rogpeppe/fastuuid v1.2.0/go.mod h1:jVj6XXZzXRy/MSR5jhDC/2q6DgLz+nrA6LYCDYWNEvQ=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
-github.com/rogpeppe/go-internal v1.13.1 h1:KvO1DLK/DRN07sQ1LQKScxyZJuNnedQ5/wKSR38lUII=
-github.com/rogpeppe/go-internal v1.13.1/go.mod h1:uMEvuHeurkdAXX61udpOXGD/AzZDWNMNyH2VO9fmH0o=
+github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=
+github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7so1lCWt35ZSgc=
 github.com/rs/cors v1.11.1 h1:eU3gRzXLRK57F5rKMGMZURNdIG4EoAmX8k94r9wXWHA=
 github.com/rs/cors v1.11.1/go.mod h1:XyqrcTp5zjWr1wsJ8PIRZssZ8b/WMcMf71DJnit4EMU=
 github.com/rs/cors/wrapper/gin v0.0.0-20240830163046-1084d89a1692 h1:lwzJgPw5Y6pvC8mwbedX9HfdywUKcpNdcviftZsb1uY=
