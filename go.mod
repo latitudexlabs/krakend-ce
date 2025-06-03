@@ -7,7 +7,7 @@ require (
 	github.com/anshulgoel27/krakend-ipfilter v0.0.0-20250516161736-07c630d95143
 	github.com/anshulgoel27/krakend-lognats v0.0.0-20250603121510-ee5f882322ac
 	github.com/anshulgoel27/krakend-pubsub-nats v0.0.0-20250525073633-56946f710f12
-	github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250603124124-2247e3bcf51c
+	github.com/anshulgoel27/krakend-ratelimit/v3 v3.0.0-20250603144345-afdd697d982a
 	github.com/gin-gonic/gin v1.10.1
 	github.com/go-contrib/uuid v1.2.0
 	github.com/krakend/krakend-otel v0.10.2
