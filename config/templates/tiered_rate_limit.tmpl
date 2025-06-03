@@ -19,15 +19,15 @@
             "tier_value_as": "literal",
             "ratelimits": [
                 {
-                    "client_max_rate": 5,
-                    "client_capacity": 5,
-                    "every": "1s",
+                    "client_max_rate": 2,
+                    "client_capacity": 2,
+                    "every": "10s",
                     "strategy": "header",
                     "key": "X-Org-Id"
                 },
                 {
-                    "client_max_rate": 100,
-                    "client_capacity": 100,
+                    "client_max_rate": 10,
+                    "client_capacity": 10,
                     "redis_connection_name": "redis_rate_limit_pool",
                     "every": "24h",
                     "strategy": "header",
